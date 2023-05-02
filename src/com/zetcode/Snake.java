@@ -5,15 +5,13 @@ import javax.swing.JFrame;
 public class Snake extends JFrame {
 
     public Snake() {
-        
         initUI();
         new Sound("sound/bgm.wav");
+        //ㅇㅇ
     }
-    
     private void initUI() {
         
         add(new Board());
-               
         setResizable(false);
         pack();
         
