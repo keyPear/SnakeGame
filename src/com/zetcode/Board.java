@@ -25,7 +25,6 @@ public class Board extends JPanel implements ActionListener {
     private final int DELAY = 30;
     private final int GAP = 2; // 각 부분 사이의 여유 공간
     private final int INIT_SPEED = DOT_SIZE + GAP;
-    private final int TIMER_DELAY = 30; // 사과 생성 주기
 
     private final int x[] = new int[ALL_DOTS];
     private final int y[] = new int[ALL_DOTS];
@@ -45,6 +44,9 @@ public class Board extends JPanel implements ActionListener {
 
     private long lastAppleTime;
     private final int APPLE_INTERVAL = 1000; // 사과 생성 주기(ms, 1000ms = 1초)
+
+    private MonsterEntity[] monsterEntities; // monster 생성
+    private final int MONSTER_COUNT = 10; // 원하는 몬스터 수를 지정하세요.
 
     public Board() {
         initBoard();
@@ -68,7 +70,9 @@ public class Board extends JPanel implements ActionListener {
         head = iih.getImage();
 
         AppleEntity.loadImage("src/resources/apple.png");
+
     }
+
 
     private void initGame() {
         dots = 3;
@@ -77,6 +81,18 @@ public class Board extends JPanel implements ActionListener {
             x[z] = 50 - z * 10;
             y[z] = 50;
         }
+
+        MonsterEntity.loadImage("src/resources/monster.png");
+
+        // 몬스터 생성 및 위치 지정
+        monsterEntities = new MonsterEntity[MONSTER_COUNT];
+        for (int i = 0; i < MONSTER_COUNT; i++) {
+            int monsterX = (int) (Math.random() * RAND_POS) * DOT_SIZE;
+            int monsterY = (int) (Math.random() * RAND_POS) * DOT_SIZE;
+
+            monsterEntities[i] = new MonsterEntity(monsterX, monsterY);
+        }
+
 
         apple = new AppleEntity(0, 0);
         lastAppleTime = System.currentTimeMillis();
@@ -103,6 +119,12 @@ public class Board extends JPanel implements ActionListener {
                     g.drawImage(ball, x[z], y[z], this);
                 }
             }
+
+            // 몬스터 이미지 그리기
+            for (int i = 0; i < MONSTER_COUNT; i++) {
+                g.drawImage(monsterEntities[i].getImage(), monsterEntities[i].getX(), monsterEntities[i].getY(), this);
+            }
+
 
             Toolkit.getDefaultToolkit().sync();
         } else {
@@ -184,7 +206,21 @@ public class Board extends JPanel implements ActionListener {
         if (!inGame) {
             timer.stop();
         }
+        checkMonsterCollision();
     }
+
+    private void checkMonsterCollision() {
+        for (int z = 0; z < MONSTER_COUNT; z++) {
+            int deltaX = Math.abs(monsterEntities[z].getX() - x[0]);
+            int deltaY = Math.abs(monsterEntities[z].getY() - y[0]);
+
+            if (deltaX < (DOT_SIZE + GAP) && deltaY < (DOT_SIZE + GAP)) {
+                inGame = false;
+            }
+        }
+    }
+
+
 
     private void locateApple() {
         int r = (int) (Math.random() * RAND_POS);
