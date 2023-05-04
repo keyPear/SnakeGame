@@ -20,6 +20,7 @@ public class AppleEntity {
         apple_y = (r * DOT_SIZE);
     }
 
+
     public int getAppleX() {
         return apple_x;
     }
@@ -28,4 +29,3 @@ public class AppleEntity {
         return apple_y;
     }
 }
-

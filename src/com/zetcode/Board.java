@@ -15,14 +15,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+
 public class Board extends JPanel implements ActionListener {
 
-    private final int B_WIDTH = 300;
-    private final int B_HEIGHT = 300;
+    private final int B_WIDTH = 800;
+    private final int B_HEIGHT = 800;
     private final int DOT_SIZE = 10;
     private final int ALL_DOTS = 900;
-    private final int RAND_POS = 29;
-    private final int DELAY = 140;
+
+    //B_WIDTH,B_HEIGHT에 따라 랜덤값 생성
+    private final int RAND_POS = (int) Math.ceil((double) Math.min(B_WIDTH, B_HEIGHT - DOT_SIZE) / DOT_SIZE);
+
+    private final int DELAY = 100;
 
     private SnakeEntity snake;
     private AppleEntity appleEntity;
@@ -37,6 +41,9 @@ public class Board extends JPanel implements ActionListener {
     private Image ball;
     private Image apple;
     private Image head;
+    private Image obstacle;
+
+    private ObstacleEntity obstacleEntity;
 
     public Board() {
         initBoard();
@@ -61,15 +68,24 @@ public class Board extends JPanel implements ActionListener {
 
         ImageIcon iih = new ImageIcon("src/resources/head.png");
         head = iih.getImage();
+
+        ImageIcon iio = new ImageIcon("src/resources/obstacle.png");
+        obstacle = iio.getImage();
+
     }
 
     private void initGame() {
         snake = new SnakeEntity(ALL_DOTS);
         appleEntity = new AppleEntity(RAND_POS, DOT_SIZE);
 
+        appleEntity.locateApple(); // Pass RAND_POS to locateApple method
+
+        obstacleEntity = new ObstacleEntity(3, DOT_SIZE, RAND_POS); // Pass RAND_POS to ObstacleEntity constructor
+
         timer = new Timer(DELAY, this);
         timer.start();
     }
+
 
     @Override
     public void paintComponent(Graphics g) {
@@ -88,6 +104,10 @@ public class Board extends JPanel implements ActionListener {
                 } else {
                     g.drawImage(ball, snake.getX()[z], snake.getY()[z], this);
                 }
+            }
+
+            for (int i = 0; i < obstacleEntity.getObstacleX().size(); i++) {
+                g.drawImage(obstacle, obstacleEntity.getObstacleX().get(i), obstacleEntity.getObstacleY().get(i), this);
             }
 
             Toolkit.getDefaultToolkit().sync();
@@ -121,6 +141,12 @@ public class Board extends JPanel implements ActionListener {
     private void checkCollision() {
         if (!snake.checkCollision(DOT_SIZE, B_WIDTH, B_HEIGHT)) {
             inGame = false;
+        }
+
+        for (int i = 0; i < obstacleEntity.getObstacleX().size(); i++) {
+            if (snake.getX()[0] == obstacleEntity.getObstacleX().get(i) && snake.getY()[0] == obstacleEntity.getObstacleY().get(i)) {
+                inGame = false;
+            }
         }
 
         if (!inGame) {
