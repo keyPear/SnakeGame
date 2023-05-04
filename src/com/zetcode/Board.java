@@ -130,8 +130,11 @@ public class Board extends JPanel implements ActionListener {
                 g.drawImage(obstacle, obstacleEntity.getObstacleX().get(i), obstacleEntity.getObstacleY().get(i), this);
             }
 
-            for (int i = 0; i < meteorEntity.getMeteorX().length; i++) {
-                g.drawImage(meteorEntity.getMeteorImage(), meteorEntity.getMeteorX()[i], meteorEntity.getMeteorY(), this);
+            // 지렁이의 길이가 4의 배수일 때 메테오를 그립니다.
+            if (snake.getDots() % 4 == 0) {
+                for (int i = 0; i < meteorEntity.getMeteorX().length; i++) {
+                    g.drawImage(meteorEntity.getMeteorImage(), meteorEntity.getMeteorX()[i], meteorEntity.getMeteorY(), this);
+                }
             }
 
             Toolkit.getDefaultToolkit().sync();
@@ -140,6 +143,7 @@ public class Board extends JPanel implements ActionListener {
             gameOver(g);
         }
     }
+
 
     private void gameOver(Graphics g) {
         String msg = "Game Over";
@@ -160,8 +164,15 @@ public class Board extends JPanel implements ActionListener {
             if (current_apple == max_apple) {
                 locateApples();
             }
+
+            // 지렁이의 길이가 4의 배수일 때 메테오 생성
+            if (snake.getDots() % 4 == 0) {
+                meteorEntity = new MeteorEntity(10);
+                lastMeteorTime = System.currentTimeMillis();
+            }
         }
     }
+
 
 
     private void locateApples() {
@@ -189,20 +200,22 @@ public class Board extends JPanel implements ActionListener {
             }
         }
 
-        //메테오와 충돌 확인
-        for (int i = 0; i < meteorEntity.getMeteorX().length; i++) {
-            if (Math.abs(snake.getX()[0] - meteorEntity.getMeteorX()[i]) < meteorEntity.getMeteorImage().getWidth(null)
-                    && Math.abs(snake.getY()[0] - meteorEntity.getMeteorY()) < meteorEntity.getMeteorImage().getHeight(null)) {
-                inGame = false;
+        // 지렁이의 길이가 4의 배수인 경우에만 메테오와 충돌을 검사합니다.
+        if (snake.getDots() % 4 == 0) {
+            //메테오와 충돌 확인
+            for (int i = 0; i < meteorEntity.getMeteorX().length; i++) {
+                if (Math.abs(snake.getX()[0] - meteorEntity.getMeteorX()[i]) < meteorEntity.getMeteorImage().getWidth(null)
+                        && Math.abs(snake.getY()[0] - meteorEntity.getMeteorY()) < meteorEntity.getMeteorImage().getHeight(null)) {
+                    inGame = false;
+                }
             }
         }
-
-
 
         if (!inGame) {
             timer.stop();
         }
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
