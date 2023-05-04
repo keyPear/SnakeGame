@@ -17,20 +17,15 @@ import javax.swing.Timer;
 
 public class Board extends JPanel implements ActionListener {
 
-    private final int B_WIDTH = 800;
-    private final int B_HEIGHT = 800;
+    private final int B_WIDTH = 300;
+    private final int B_HEIGHT = 300;
     private final int DOT_SIZE = 10;
-    private final int ALL_DOTS = 22500;
-    private final int RAND_POS = 149;
-    private final int DELAY = 30;
-    private final int GAP = 2; // 각 부분 사이의 여유 공간
-    private final int INIT_SPEED = DOT_SIZE + GAP;
+    private final int ALL_DOTS = 900;
+    private final int RAND_POS = 29;
+    private final int DELAY = 140;
 
-    private final int x[] = new int[ALL_DOTS];
-    private final int y[] = new int[ALL_DOTS];
-
-    private int dots;
-    private AppleEntity apple;
+    private SnakeEntity snake;
+    private AppleEntity appleEntity;
 
     private boolean leftDirection = false;
     private boolean rightDirection = true;
@@ -40,13 +35,8 @@ public class Board extends JPanel implements ActionListener {
 
     private Timer timer;
     private Image ball;
+    private Image apple;
     private Image head;
-
-    private long lastAppleTime;
-    private final int APPLE_INTERVAL = 1000; // 사과 생성 주기(ms, 1000ms = 1초)
-
-    private MonsterEntity[] monsterEntities; // monster 생성
-    private final int MONSTER_COUNT = 10; // 원하는 몬스터 수를 지정하세요.
 
     public Board() {
         initBoard();
@@ -66,36 +56,16 @@ public class Board extends JPanel implements ActionListener {
         ImageIcon iid = new ImageIcon("src/resources/dot.png");
         ball = iid.getImage();
 
+        ImageIcon iia = new ImageIcon("src/resources/apple.png");
+        apple = iia.getImage();
+
         ImageIcon iih = new ImageIcon("src/resources/head.png");
         head = iih.getImage();
-
-        AppleEntity.loadImage("src/resources/apple.png");
-
     }
 
-
     private void initGame() {
-        dots = 3;
-
-        for (int z = 0; z < dots; z++) {
-            x[z] = 50 - z * 10;
-            y[z] = 50;
-        }
-
-        MonsterEntity.loadImage("src/resources/monster.png");
-
-        // 몬스터 생성 및 위치 지정
-        monsterEntities = new MonsterEntity[MONSTER_COUNT];
-        for (int i = 0; i < MONSTER_COUNT; i++) {
-            int monsterX = (int) (Math.random() * RAND_POS) * DOT_SIZE;
-            int monsterY = (int) (Math.random() * RAND_POS) * DOT_SIZE;
-
-            monsterEntities[i] = new MonsterEntity(monsterX, monsterY);
-        }
-
-
-        apple = new AppleEntity(0, 0);
-        lastAppleTime = System.currentTimeMillis();
+        snake = new SnakeEntity(ALL_DOTS);
+        appleEntity = new AppleEntity(RAND_POS, DOT_SIZE);
 
         timer = new Timer(DELAY, this);
         timer.start();
@@ -110,23 +80,18 @@ public class Board extends JPanel implements ActionListener {
 
     private void doDrawing(Graphics g) {
         if (inGame) {
-            g.drawImage(apple.getImage(), apple.getX(), apple.getY(), this);
+            g.drawImage(apple, appleEntity.getAppleX(), appleEntity.getAppleY(), this);
 
-            for (int z = 0; z < dots; z++) {
+            for (int z = 0; z < snake.getDots(); z++) {
                 if (z == 0) {
-                    g.drawImage(head, x[z], y[z], this);
+                    g.drawImage(head, snake.getX()[z], snake.getY()[z], this);
                 } else {
-                    g.drawImage(ball, x[z], y[z], this);
+                    g.drawImage(ball, snake.getX()[z], snake.getY()[z], this);
                 }
             }
 
-            // 몬스터 이미지 그리기
-            for (int i = 0; i < MONSTER_COUNT; i++) {
-                g.drawImage(monsterEntities[i].getImage(), monsterEntities[i].getX(), monsterEntities[i].getY(), this);
-            }
-
-
             Toolkit.getDefaultToolkit().sync();
+
         } else {
             gameOver(g);
         }
@@ -143,94 +108,24 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void checkApple() {
-        int deltaX = Math.abs(x[0]- apple.getX());
-        int deltaY = Math.abs(y[0] - apple.getY());
-
-        if (deltaX < (DOT_SIZE + GAP) && deltaY < (DOT_SIZE + GAP)) {
-            dots++;
-            locateApple();
-            lastAppleTime = System.currentTimeMillis();
+        if ((snake.getX()[0] == appleEntity.getAppleX()) && (snake.getY()[0] == appleEntity.getAppleY())) {
+            snake.grow();
+            appleEntity.locateApple();
         }
     }
 
     private void move() {
-        for (int z = dots; z > 0; z--) {
-            int distanceX = Math.abs(x[z] - x[(z - 1)]);
-            int distanceY = Math.abs(y[z] - y[(z - 1)]);
-
-            if (distanceX >= (DOT_SIZE + GAP) || distanceY >= (DOT_SIZE + GAP)) {
-                x[z] = x[(z - 1)];
-                y[z] = y[(z - 1)];
-            }
-        }
-
-        if (leftDirection) {
-            x[0] -= INIT_SPEED;
-        }
-
-        if (rightDirection) {
-            x[0] += INIT_SPEED;
-        }
-
-        if (upDirection) {
-            y[0] -= INIT_SPEED;
-        }
-
-        if (downDirection) {
-            y[0] += INIT_SPEED;
-        }
+        snake.move(DOT_SIZE, leftDirection, rightDirection, upDirection, downDirection);
     }
+
     private void checkCollision() {
-        for (int z = dots; z > 0; z--) {
-            if ((z > 4) && (x[0] == x[z]) && (y[0] == y[z])) {
-                inGame = false;
-            }
-        }
-
-        if (y[0] >= B_HEIGHT) {
-            inGame = false;
-        }
-
-        if (y[0] < 0) {
-            inGame = false;
-        }
-
-        if (x[0] >= B_WIDTH) {
-            inGame = false;
-        }
-
-        if (x[0] < 0) {
+        if (!snake.checkCollision(DOT_SIZE, B_WIDTH, B_HEIGHT)) {
             inGame = false;
         }
 
         if (!inGame) {
             timer.stop();
         }
-        checkMonsterCollision();
-    }
-
-    private void checkMonsterCollision() {
-        for (int z = 0; z < MONSTER_COUNT; z++) {
-            int deltaX = Math.abs(monsterEntities[z].getX() - x[0]);
-            int deltaY = Math.abs(monsterEntities[z].getY() - y[0]);
-
-            if (deltaX < (DOT_SIZE + GAP) && deltaY < (DOT_SIZE + GAP)) {
-                inGame = false;
-            }
-        }
-    }
-
-
-
-    private void locateApple() {
-        int r = (int) (Math.random() * RAND_POS);
-        int x = r * DOT_SIZE;
-
-        r = (int) (Math.random() * RAND_POS);
-        int y = r * DOT_SIZE;
-
-        apple.setX(x);
-        apple.setY(y);
     }
 
     @Override
@@ -239,11 +134,6 @@ public class Board extends JPanel implements ActionListener {
             checkApple();
             checkCollision();
             move();
-
-            if (System.currentTimeMillis() - lastAppleTime > APPLE_INTERVAL) {
-                locateApple();
-                lastAppleTime = System.currentTimeMillis();
-            }
         }
 
         repaint();

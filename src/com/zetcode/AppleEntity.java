@@ -1,42 +1,31 @@
 package com.zetcode;
 
-
-import java.awt.Image;
-import javax.swing.ImageIcon;
-
 public class AppleEntity {
-    private int x, y;
-    private static Image image;
+    private final int RAND_POS;
+    private final int DOT_SIZE;
+    private int apple_x;
+    private int apple_y;
 
-    public AppleEntity(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public AppleEntity(int randPos, int dotSize) {
+        this.RAND_POS = randPos;
+        this.DOT_SIZE = dotSize;
+        locateApple();
     }
 
-    public int getX() {
-        return x;
+    public void locateApple() {
+        int r = (int) (Math.random() * RAND_POS);
+        apple_x = (r * DOT_SIZE);
+
+        r = (int) (Math.random() * RAND_POS);
+        apple_y = (r * DOT_SIZE);
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public int getAppleX() {
+        return apple_x;
     }
 
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public Image getImage() {
-        return image;
-    }
-
-    public static void loadImage(String imagePath) {
-        ImageIcon iia = new ImageIcon(imagePath);
-        image = iia.getImage();
+    public int getAppleY() {
+        return apple_y;
     }
 }
-
 

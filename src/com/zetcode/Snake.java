@@ -1,17 +1,19 @@
 package com.zetcode;
+
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 
 public class Snake extends JFrame {
 
     public Snake() {
+        
         initUI();
-        new Sound("sound/bgm.wav");
-        //ㅇㅇ
     }
+    
     private void initUI() {
         
         add(new Board());
+               
         setResizable(false);
         pack();
         
@@ -19,6 +21,7 @@ public class Snake extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+    
 
     public static void main(String[] args) {
         
