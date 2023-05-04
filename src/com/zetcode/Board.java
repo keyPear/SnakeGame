@@ -37,6 +37,10 @@ public class Board extends JPanel implements ActionListener {
     private boolean downDirection = false;
     private boolean inGame = true;
 
+
+    private final int max_apple = 5; // 최대 생성 가능한 사과 개수
+    private int current_apple = 0; // 현재 생성된 사과 개수
+
     private Timer timer;
     private Image ball;
     private Image apple;
@@ -80,7 +84,9 @@ public class Board extends JPanel implements ActionListener {
 
         appleEntity.locateApple(); // Pass RAND_POS to locateApple method
 
-        obstacleEntity = new ObstacleEntity(3, DOT_SIZE, RAND_POS); // Pass RAND_POS to ObstacleEntity constructor
+
+        //장애물 개수 조절
+        obstacleEntity = new ObstacleEntity(10, DOT_SIZE, RAND_POS); // Pass RAND_POS to ObstacleEntity constructor
 
         timer = new Timer(DELAY, this);
         timer.start();
@@ -131,8 +137,23 @@ public class Board extends JPanel implements ActionListener {
         if ((snake.getX()[0] == appleEntity.getAppleX()) && (snake.getY()[0] == appleEntity.getAppleY())) {
             snake.grow();
             appleEntity.locateApple();
+            current_apple++;
+
+            if (current_apple == max_apple) {
+                locateApples();
+            }
         }
     }
+
+
+    private void locateApples() {
+        int newApples = (int) (Math.random() * (max_apple + 1));
+        for (int i = 0; i < newApples; i++) {
+            appleEntity.locateApple();
+        }
+        current_apple = 0;
+    }
+
 
     private void move() {
         snake.move(DOT_SIZE, leftDirection, rightDirection, upDirection, downDirection);
