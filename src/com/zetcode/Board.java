@@ -47,6 +47,12 @@ public class Board extends JPanel implements ActionListener {
     private long lastMeteorTime;
     private MeteorEntity meteorEntity;
 
+    private ShootEntity shootEntity;
+    private final int shootSpeed = 5;
+
+    private Image shoot;
+
+
 
     private Timer timer;
     private Image ball;
@@ -54,8 +60,10 @@ public class Board extends JPanel implements ActionListener {
     private Image head;
     private Image obstacle;
     private Image meteor;
+    private Image monster;
 
     private ObstacleEntity obstacleEntity;
+    private MonsterEntity monsterEntity;
 
     public Board() {
         initBoard();
@@ -86,6 +94,12 @@ public class Board extends JPanel implements ActionListener {
 
         ImageIcon iim = new ImageIcon(("src/resources/meteor.png"));
         meteor = iim.getImage();
+
+        ImageIcon iimn = new ImageIcon("src/resources/monster.png");
+        monster = iimn.getImage();
+        ImageIcon iis = new ImageIcon("src/resources/shoot.png");
+        shoot = iis.getImage();
+
     }
 
     private void initGame() {
@@ -101,6 +115,9 @@ public class Board extends JPanel implements ActionListener {
         // 메테오 개수를 원하는 값으로 설정 (예: 10)
         meteorEntity = new MeteorEntity(10);
         lastMeteorTime = System.currentTimeMillis();
+
+        //몬수터 수 조절
+        monsterEntity = new MonsterEntity(10, DOT_SIZE, RAND_POS);
 
         timer = new Timer(DELAY, this);
         timer.start();
@@ -136,6 +153,11 @@ public class Board extends JPanel implements ActionListener {
                     g.drawImage(meteorEntity.getMeteorImage(), meteorEntity.getMeteorX()[i], meteorEntity.getMeteorY(), this);
                 }
             }
+
+            for (int i = 0; i < monsterEntity.getShootEntity().getShootX().size(); i++) {
+                g.drawImage(shoot, monsterEntity.getShootEntity().getShootX().get(i), monsterEntity.getShootEntity().getShootY().get(i), this);
+            }
+
 
             Toolkit.getDefaultToolkit().sync();
 
@@ -224,6 +246,7 @@ public class Board extends JPanel implements ActionListener {
             checkCollision();
             move();
             updateMeteor();
+            monsterEntity.updateMonsterAndShootPositions(snake, shootSpeed);
         }
 
         repaint();
