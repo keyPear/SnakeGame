@@ -26,7 +26,9 @@ public class Board extends JPanel implements ActionListener {
     //B_WIDTH,B_HEIGHT에 따라 랜덤값 생성
     private final int RAND_POS = (int) Math.ceil((double) Math.min(B_WIDTH, B_HEIGHT - DOT_SIZE) / DOT_SIZE);
 
-    private final int DELAY = 100;
+    public static int DELAY = 200; ///게임 속도 (지렁이, 메테오 등)
+
+    public static int NUM = 10; ///메테오, 장애물, 몬스터의 개수
 
     private SnakeEntity snake;
     private AppleEntity appleEntity;
@@ -67,6 +69,22 @@ public class Board extends JPanel implements ActionListener {
 
     public Board() {
         initBoard();
+    }
+
+    public static int getDelay() {
+        return DELAY;
+    }
+
+    public static void setDelay(int delay) {
+        DELAY = delay;
+    }
+
+    public static int getNum() {
+        return NUM;
+    }
+
+    public static void setNum(int num) {
+        DELAY = num;
     }
 
     private void initBoard() {
@@ -110,14 +128,14 @@ public class Board extends JPanel implements ActionListener {
 
 
         //장애물 개수 조절
-        obstacleEntity = new ObstacleEntity(10, DOT_SIZE, RAND_POS); // Pass RAND_POS to ObstacleEntity constructor
+        obstacleEntity = new ObstacleEntity(NUM, DOT_SIZE, RAND_POS); // Pass RAND_POS to ObstacleEntity constructor
 
         // 메테오 개수를 원하는 값으로 설정 (예: 10)
-        meteorEntity = new MeteorEntity(10);
+        meteorEntity = new MeteorEntity(NUM);
         lastMeteorTime = System.currentTimeMillis();
 
         //몬수터 수 조절
-        monsterEntity = new MonsterEntity(10, DOT_SIZE, RAND_POS);
+        monsterEntity = new MonsterEntity(NUM, DOT_SIZE, RAND_POS);
 
         timer = new Timer(DELAY, this);
         timer.start();
