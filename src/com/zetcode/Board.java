@@ -154,6 +154,13 @@ public class Board extends JPanel implements ActionListener {
                 }
             }
 
+            //몬스터
+            for (int i = 0; i < monsterEntity.getMonsterX().size(); i++) {
+                g.drawImage(monster, monsterEntity.getMonsterX().get(i), monsterEntity.getMonsterY().get(i), this);
+            }
+
+
+            //총알
             for (int i = 0; i < monsterEntity.getShootEntity().getShootX().size(); i++) {
                 g.drawImage(shoot, monsterEntity.getShootEntity().getShootX().get(i), monsterEntity.getShootEntity().getShootY().get(i), this);
             }
