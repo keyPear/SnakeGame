@@ -41,11 +41,19 @@ public class Board extends JPanel implements ActionListener {
     private final int max_apple = 5; // 최대 생성 가능한 사과 개수
     private int current_apple = 0; // 현재 생성된 사과 개수
 
+    private final int meteorTime = 1; // 원하는 메테오 시간
+    private final int meteorSpeed = 5; // 원하는 메테오 시간
+
+    private long lastMeteorTime;
+    private MeteorEntity meteorEntity;
+
+
     private Timer timer;
     private Image ball;
     private Image apple;
     private Image head;
     private Image obstacle;
+    private Image meteor;
 
     private ObstacleEntity obstacleEntity;
 
@@ -76,6 +84,8 @@ public class Board extends JPanel implements ActionListener {
         ImageIcon iio = new ImageIcon("src/resources/obstacle.png");
         obstacle = iio.getImage();
 
+        ImageIcon iim = new ImageIcon(("src/resources/meteor.png"));
+        meteor = iim.getImage();
     }
 
     private void initGame() {
@@ -87,6 +97,10 @@ public class Board extends JPanel implements ActionListener {
 
         //장애물 개수 조절
         obstacleEntity = new ObstacleEntity(10, DOT_SIZE, RAND_POS); // Pass RAND_POS to ObstacleEntity constructor
+
+        // 메테오 개수를 원하는 값으로 설정 (예: 10)
+        meteorEntity = new MeteorEntity(10);
+        lastMeteorTime = System.currentTimeMillis();
 
         timer = new Timer(DELAY, this);
         timer.start();
@@ -114,6 +128,10 @@ public class Board extends JPanel implements ActionListener {
 
             for (int i = 0; i < obstacleEntity.getObstacleX().size(); i++) {
                 g.drawImage(obstacle, obstacleEntity.getObstacleX().get(i), obstacleEntity.getObstacleY().get(i), this);
+            }
+
+            for (int i = 0; i < meteorEntity.getMeteorX().length; i++) {
+                g.drawImage(meteorEntity.getMeteorImage(), meteorEntity.getMeteorX()[i], meteorEntity.getMeteorY(), this);
             }
 
             Toolkit.getDefaultToolkit().sync();
@@ -164,11 +182,22 @@ public class Board extends JPanel implements ActionListener {
             inGame = false;
         }
 
+        //장애물과 충돌 확인
         for (int i = 0; i < obstacleEntity.getObstacleX().size(); i++) {
             if (snake.getX()[0] == obstacleEntity.getObstacleX().get(i) && snake.getY()[0] == obstacleEntity.getObstacleY().get(i)) {
                 inGame = false;
             }
         }
+
+        //메테오와 충돌 확인
+        for (int i = 0; i < meteorEntity.getMeteorX().length; i++) {
+            if (Math.abs(snake.getX()[0] - meteorEntity.getMeteorX()[i]) < meteorEntity.getMeteorImage().getWidth(null)
+                    && Math.abs(snake.getY()[0] - meteorEntity.getMeteorY()) < meteorEntity.getMeteorImage().getHeight(null)) {
+                inGame = false;
+            }
+        }
+
+
 
         if (!inGame) {
             timer.stop();
@@ -181,9 +210,18 @@ public class Board extends JPanel implements ActionListener {
             checkApple();
             checkCollision();
             move();
+            updateMeteor();
         }
 
         repaint();
+    }
+
+    private void updateMeteor() {
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastMeteorTime > meteorTime) {
+            meteorEntity.updatePosition(meteorSpeed); // 원하는 메테오 이동 속도
+            lastMeteorTime = currentTime;
+        }
     }
 
     private class TAdapter extends KeyAdapter {
