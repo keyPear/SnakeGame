@@ -6,8 +6,8 @@ import javax.swing.JFrame;
 public class Snake extends JFrame {
 
     public Snake() {
-        
         initUI();
+        new Sound("sound/bgm.wav");
     }
     
     private void initUI() {
