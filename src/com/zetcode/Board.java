@@ -170,6 +170,7 @@ public class Board extends JPanel implements ActionListener {
 
         } else {
             gameOver(g);
+            backMainFrame();
         }
     }
 
@@ -296,5 +297,10 @@ public class Board extends JPanel implements ActionListener {
                 leftDirection = false;
             }
         }
+    }
+    private void backMainFrame() {
+        MainFrame mainFrame = new MainFrame();
+        setVisible(false);
+        mainFrame.setVisible(true);
     }
 }
