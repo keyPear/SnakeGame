@@ -28,7 +28,7 @@ public class Board extends JPanel implements ActionListener {
 
     public static int DELAY = 200; ///게임 속도 (지렁이, 메테오 등)
 
-    public static int NUM = 10; ///메테오, 장애물, 몬스터의 개수
+    public static int NUM= 10;  ///메테오, 장애물, 몬스터의 개수
 
     private SnakeEntity snake;
     private AppleEntity appleEntity;
@@ -84,7 +84,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     public static void setNum(int num) {
-        DELAY = num;
+        NUM = num;
     }
 
     private void initBoard() {

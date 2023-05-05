@@ -98,40 +98,52 @@ public class LevelSelect extends JFrame implements KeyListener{
     }
 
 
-
+    // 추가적인 레벨에 따른 DELAY, Num 값 설정
     public static void selectLevel(int level)  {
         switch(level) {
             case 1:
-                Board.setDelay(300);
-                Board.setNum(7);
+                Board.setDelay(150);
+                Board.setNum(13);
                 System.out.println(1);
+                System.out.println(Board.getDelay());
+                System.out.println(Board.getNum());
                 break;
             case 2:
-                Board.setDelay(150);
+                Board.setDelay(125);
                 Board.setNum(15);
                 System.out.println(2);
+                System.out.println(Board.getDelay());
+                System.out.println(Board.getNum());
                 break;
             case 3:
                 Board.setDelay(100);
                 Board.setNum(20);
                 System.out.println(3);
+                System.out.println(Board.getDelay());
+                System.out.println(Board.getNum());
                 break;
             case 4:
-                Board.setDelay(80);
-                Board.setNum(25);
+                Board.setDelay(75);
+                Board.setNum(23);
                 System.out.println(4);
+                System.out.println(Board.getDelay());
+                System.out.println(Board.getNum());
                 break;
             case 5:
                 Board.setDelay(50);
-                Board.setNum(30);
+                Board.setNum(25);
                 System.out.println(5);
+                System.out.println(Board.getDelay());
+                System.out.println(Board.getNum());
                 break;
             default:
                 Board.setDelay(200);
                 Board.setNum(10);
-                System.out.println("base");
+                System.out.println(0);
+                System.out.println(Board.getDelay());
+                System.out.println(Board.getNum());
                 break;
-            // 추가적인 레벨에 따른 DELAY, Num 값 설정
+
             }
     }
 
