@@ -57,12 +57,94 @@ public class LevelSelect extends JFrame implements KeyListener{
         btn5.setFocusable(true);
 
 
+        // Level 버튼의 ActionPerformed 메서드에 selectLevel 메서드 호출 추가
+        btn1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectLevel(1);
+            }
+        });
+        btn2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectLevel(2);
+            }
+        });
+        btn3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectLevel(3);
+            }
+        });
+        btn4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectLevel(4);
+            }
+        });
+        btn5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectLevel(5);
+            }
+        });
+
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 mainFrame.setVisible(true);
             }
         });
+    }
+
+
+    // 추가적인 레벨에 따른 DELAY, Num 값 설정
+    public static void selectLevel(int level)  {
+        switch(level) {
+            case 1:
+                Board.setDelay(150);
+                Board.setNum(13);
+                System.out.println(1);
+                System.out.println(Board.getDelay());
+                System.out.println(Board.getNum());
+                break;
+            case 2:
+                Board.setDelay(125);
+                Board.setNum(15);
+                System.out.println(2);
+                System.out.println(Board.getDelay());
+                System.out.println(Board.getNum());
+                break;
+            case 3:
+                Board.setDelay(100);
+                Board.setNum(20);
+                System.out.println(3);
+                System.out.println(Board.getDelay());
+                System.out.println(Board.getNum());
+                break;
+            case 4:
+                Board.setDelay(75);
+                Board.setNum(23);
+                System.out.println(4);
+                System.out.println(Board.getDelay());
+                System.out.println(Board.getNum());
+                break;
+            case 5:
+                Board.setDelay(50);
+                Board.setNum(25);
+                System.out.println(5);
+                System.out.println(Board.getDelay());
+                System.out.println(Board.getNum());
+                break;
+            default:
+                Board.setDelay(200);
+                Board.setNum(10);
+                System.out.println(0);
+                System.out.println(Board.getDelay());
+                System.out.println(Board.getNum());
+                break;
+
+            }
     }
 
     @Override
