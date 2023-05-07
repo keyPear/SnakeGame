@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import com.zetcode.InGamePannel;
+import com.zetcode.GameFrame;
 
 public class Board extends JPanel implements ActionListener {
 
@@ -96,6 +97,9 @@ public class Board extends JPanel implements ActionListener {
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
         loadImages();
         initGame();
+        timepannel=new InGamePannel();
+        timepannel.setBounds(0,0,150,30);
+        add(timepannel);
     }
 
     private void loadImages() {
@@ -140,9 +144,6 @@ public class Board extends JPanel implements ActionListener {
 
         timer = new Timer(DELAY, this);
         timer.start();
-        timepannel=new InGamePannel();
-        timepannel.setBounds(0,0,150,30);
-        add(timepannel);
     }
 
 
@@ -192,7 +193,6 @@ public class Board extends JPanel implements ActionListener {
 
         } else {
             gameOver(g);
-            backMainFrame();
         }
     }
 
@@ -205,6 +205,8 @@ public class Board extends JPanel implements ActionListener {
         g.setColor(Color.white);
         g.setFont(small);
         g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
+        GameFrame gameFrame=new GameFrame();
+        gameFrame.setVisible(true);
     }
 
     private void checkApple() {
