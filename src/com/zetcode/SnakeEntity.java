@@ -5,16 +5,27 @@ public class SnakeEntity {
     private final int[] x;
     private final int[] y;
     private int dots;
+    private int hp;
 
     public SnakeEntity(int allDots) {
         x = new int[allDots];
         y = new int[allDots];
         dots = 3;
+        hp = 3;
 
         for (int z = 0; z < dots; z++) {
             x[z] = 50 - z * 10;
             y[z] = 50;
         }
+    }
+    // hp getter
+    public int getHp() {
+        return hp;
+    }
+
+    // hp 감소 메서드
+    public void decreaseHp() {
+        hp--;
     }
 
     public void move(int dotSize, boolean leftDirection, boolean rightDirection, boolean upDirection, boolean downDirection) {
@@ -47,9 +58,11 @@ public class SnakeEntity {
             }
         }
 
+
         if (y[0] >= bHeight || y[0] < 0 || x[0] >= bWidth || x[0] < 0) {
             return false;
         }
+
 
         return true;
     }

@@ -27,7 +27,7 @@ public class Board extends JPanel implements ActionListener {
     //B_WIDTH,B_HEIGHT에 따라 랜덤값 생성
     private final int RAND_POS = (int) Math.ceil((double) Math.min(B_WIDTH, B_HEIGHT - DOT_SIZE) / DOT_SIZE);
 
-    public static int DELAY = 200; ///게임 속도 (지렁이, 메테오 등)
+    public static int DELAY = 100; ///게임 속도 (지렁이, 메테오 등)
 
     public static int NUM= 10;  ///메테오, 장애물, 몬스터의 개수
 
@@ -52,6 +52,13 @@ public class Board extends JPanel implements ActionListener {
 
     private ShootEntity shootEntity;
     private final int shootSpeed = 5;
+
+    //지렁이가 무적 상태인지를 저장
+    private boolean invincible = false;
+    //변수와 무적 상태가 시작된 시간을 저장
+    private long invincible_start_time;
+
+    private Image invincible_head;
 
     private Image shoot;
 
@@ -119,6 +126,9 @@ public class Board extends JPanel implements ActionListener {
         ImageIcon iis = new ImageIcon("src/resources/shoot.png");
         shoot = iis.getImage();
 
+        ImageIcon ii_invincible_head = new ImageIcon("src/resources/dot.png");
+        invincible_head = ii_invincible_head.getImage();
+
     }
 
     private void initGame() {
@@ -159,7 +169,11 @@ public class Board extends JPanel implements ActionListener {
 
             for (int z = 0; z < snake.getDots(); z++) {
                 if (z == 0) {
-                    g.drawImage(head, snake.getX()[z], snake.getY()[z], this);
+                    if (invincible) {
+                        g.drawImage(invincible_head, snake.getX()[z], snake.getY()[z], this);
+                    } else {
+                        g.drawImage(head, snake.getX()[z], snake.getY()[z], this);
+                    }
                 } else {
                     g.drawImage(ball, snake.getX()[z], snake.getY()[z], this);
                 }
@@ -241,33 +255,35 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void checkCollision() {
-        if (!snake.checkCollision(DOT_SIZE, B_WIDTH, B_HEIGHT)) {
-            inGame = false;
-        }
 
-        //장애물과 충돌 확인
-        for (int i = 0; i < obstacleEntity.getObstacleX().size(); i++) {
-            if (snake.getX()[0] == obstacleEntity.getObstacleX().get(i) && snake.getY()[0] == obstacleEntity.getObstacleY().get(i)) {
+        if(!invincible) {
+            if (!snake.checkCollision(DOT_SIZE, B_WIDTH, B_HEIGHT)) {
                 inGame = false;
             }
-        }
 
-        // 지렁이의 길이가 4의 배수인 경우에만 메테오와 충돌을 검사합니다.
-        if (snake.getDots() % 4 == 0) {
-            //메테오와 충돌 확인
-            for (int i = 0; i < meteorEntity.getMeteorX().length; i++) {
-                if (Math.abs(snake.getX()[0] - meteorEntity.getMeteorX()[i]) < meteorEntity.getMeteorImage().getWidth(null)
-                        && Math.abs(snake.getY()[0] - meteorEntity.getMeteorY()) < meteorEntity.getMeteorImage().getHeight(null)) {
+            //장애물과 충돌 확인
+            for (int i = 0; i < obstacleEntity.getObstacleX().size(); i++) {
+                if (snake.getX()[0] == obstacleEntity.getObstacleX().get(i) && snake.getY()[0] == obstacleEntity.getObstacleY().get(i)) {
                     inGame = false;
                 }
             }
-        }
 
-        if (!inGame) {
-            timer.stop();
+            // 지렁이의 길이가 4의 배수인 경우에만 메테오와 충돌을 검사합니다.
+            if (snake.getDots() % 4 == 0) {
+                //메테오와 충돌 확인
+                for (int i = 0; i < meteorEntity.getMeteorX().length; i++) {
+                    if (Math.abs(snake.getX()[0] - meteorEntity.getMeteorX()[i]) < meteorEntity.getMeteorImage().getWidth(null)
+                            && Math.abs(snake.getY()[0] - meteorEntity.getMeteorY()) < meteorEntity.getMeteorImage().getHeight(null)) {
+                        inGame = false;
+                    }
+                }
+            }
+
+            if (!inGame) {
+                timer.stop();
+            }
         }
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -277,9 +293,18 @@ public class Board extends JPanel implements ActionListener {
             move();
             updateMeteor();
             monsterEntity.updateMonsterAndShootPositions(snake, shootSpeed);
+            updateInvincibility();
         }
 
         repaint();
+    }
+    private void updateInvincibility() {
+        if (invincible) {
+            long currentTime = System.currentTimeMillis();
+            if (currentTime - invincible_start_time > 3000) {
+                invincible = false;
+            }
+        }
     }
 
     private void updateMeteor() {
@@ -317,6 +342,10 @@ public class Board extends JPanel implements ActionListener {
                 downDirection = true;
                 rightDirection = false;
                 leftDirection = false;
+            }
+            if (key == KeyEvent.VK_SPACE) {
+                invincible = true;
+                invincible_start_time = System.currentTimeMillis();
             }
         }
     }
