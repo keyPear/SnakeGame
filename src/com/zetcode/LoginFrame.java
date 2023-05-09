@@ -16,7 +16,7 @@ public class LoginFrame extends JFrame {
         setLocationRelativeTo(null);
 
 
-        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));//로그인
         JLabel idLabel = new JLabel("ID: ");
         idField = new JTextField(10);
         idPanel.add(idLabel);
