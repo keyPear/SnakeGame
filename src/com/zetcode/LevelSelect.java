@@ -5,6 +5,18 @@ import java.awt.event.*;
 
 public class LevelSelect extends JFrame implements KeyListener{
     private MainFrame mainFrame;
+    ImageIcon lv1=new ImageIcon("src/resources/btn_LV1.jpg");
+    ImageIcon lv12=new ImageIcon("src/resources/btn_LV12.jpg");
+    ImageIcon lv2=new ImageIcon("src/resources/btn_LV2.jpg");
+    ImageIcon lv22=new ImageIcon("src/resources/btn_LV22.jpg");
+    ImageIcon lv3=new ImageIcon("src/resources/btn_LV3.jpg");
+    ImageIcon lv32=new ImageIcon("src/resources/btn_LV32.jpg");
+    ImageIcon lv4=new ImageIcon("src/resources/btn_LV4.jpg");
+    ImageIcon lv42=new ImageIcon("src/resources/btn_LV42.jpg");
+    ImageIcon lv5=new ImageIcon("src/resources/btn_LV5.jpg");
+    ImageIcon lv52=new ImageIcon("src/resources/btn_LV52.jpg");
+    ImageIcon btm=new ImageIcon("src/resources/btn_BackToMain.jpg");
+    ImageIcon btm2=new ImageIcon("src/resources/btn_BackToMain2.jpg");
 
     public LevelSelect(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -13,18 +25,30 @@ public class LevelSelect extends JFrame implements KeyListener{
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setTitle("Level Select");
-        JButton backMainButton = new JButton("Back to Main");
+        JButton backMainButton = new JButton(btm);
+        backMainButton.setRolloverIcon(btm2);
+        backMainButton.setBorderPainted(false);
         backMainButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 backMainFrame();
             }
         });
-        JButton btn1=new JButton("Level 1");
-        JButton btn2=new JButton("Level 2");
-        JButton btn3=new JButton("Level 3");
-        JButton btn4=new JButton("Level 4");
-        JButton btn5=new JButton("Level 5");
+        JButton btn1=new JButton(lv1);
+        btn1.setRolloverIcon(lv12);
+        btn1.setBorderPainted(false);
+        JButton btn2=new JButton(lv2);
+        btn2.setRolloverIcon(lv22);
+        btn2.setBorderPainted(false);
+        JButton btn3=new JButton(lv3);
+        btn3.setRolloverIcon(lv32);
+        btn3.setBorderPainted(false);
+        JButton btn4=new JButton(lv4);
+        btn4.setRolloverIcon(lv42);
+        btn4.setBorderPainted(false);
+        JButton btn5=new JButton(lv5);
+        btn5.setRolloverIcon(lv52);
+        btn5.setBorderPainted(false);
 
         setLayout(null);
         backMainButton.setBounds(100,600,100,100);

@@ -9,6 +9,7 @@ import java.awt.event.WindowEvent;
 
 public class MypageFrame extends JFrame {
     private MainFrame mainFrame;
+    private LoginFrame loginFrame;
 
     public MypageFrame(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -34,6 +35,19 @@ public class MypageFrame extends JFrame {
                 mainFrame.setVisible(true);
             }
         });
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton logoutButton = new JButton("Logout");
+        buttonPanel.add(logoutButton);
+
+        logoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loginFrame.setVisible(true);
+                dispose();
+            }
+        });
+        add(buttonPanel,BorderLayout.SOUTH);
     }
 
     private void backMainFrame() {

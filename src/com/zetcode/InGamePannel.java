@@ -1,5 +1,5 @@
 package com.zetcode;
-//게임패널클래스 생성!!
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 public class InGamePannel extends JPanel implements ActionListener {
     private static final long serialVersionUID = 1L;
+
     private long startTime;
     private long elapsedTime;
     private Timer timer;

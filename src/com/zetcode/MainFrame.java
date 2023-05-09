@@ -6,12 +6,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.*;
+import javax.swing.border.Border;
+import javax.swing.BorderFactory;
 
 public class MainFrame extends JFrame implements KeyListener{
     public static final int SCREEN_WIDTH=800;
     public static final int SCREEN_HEIGHT=800;
+    ImageIcon img=new ImageIcon("src/resources/btn_GoToGame.jpg");
+    ImageIcon img2=new ImageIcon("src/resources/btn_GoToGame2.jpg");
+    ImageIcon img3=new ImageIcon("src/resources/btn_LevelSelect.jpg");
+    ImageIcon img4=new ImageIcon("src/resources/btn_LevelSelect2.jpg");
+    ImageIcon img5=new ImageIcon("src/resources/btn_OpenMypage.jpg");
+    ImageIcon img6=new ImageIcon("src/resources/btn_OpenMypage2.jpg");
+    ImageIcon img7=new ImageIcon("src/resources/btn_CloseMain.jpg");
+    ImageIcon img8=new ImageIcon("src/resources/btn_CloseMain2.jpg");
+    public static final String ID="admin";
+
     public MainFrame() {
-        JButton openMarketButton = new JButton("Level Select");
+        JButton openMarketButton = new JButton(img3);
+        openMarketButton.setRolloverIcon(img4);
         openMarketButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -19,21 +32,27 @@ public class MainFrame extends JFrame implements KeyListener{
             }
         });
 
-        JButton openMypageButton = new JButton("Open Mypage");
+        JButton openMypageButton = new JButton(img5);
+        openMypageButton.setRolloverIcon(img6);
+        openMypageButton.setBorderPainted(false);
         openMypageButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 openMypageFrame();
             }
         });
-        JButton closeMainButton = new JButton("Close Main");
+        JButton closeMainButton = new JButton(img7);
+        closeMainButton.setRolloverIcon(img8);
+        closeMainButton.setBorderPainted(false);
         closeMainButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 closeMainFrame();
             }
         });
-        JButton gotoBoardButton = new JButton("Go to game");
+        JButton gotoBoardButton = new JButton(img);
+        gotoBoardButton.setRolloverIcon(img2);
+        gotoBoardButton.setBorderPainted(false);
         gotoBoardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -70,7 +89,6 @@ public class MainFrame extends JFrame implements KeyListener{
         closeMainButton.setFocusable(true);
         gotoBoardButton.setFocusable(true);
     }
-
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
