@@ -48,16 +48,6 @@ public class GameFrame extends JFrame {
         pack();
         setLocationRelativeTo(null);
 
-        Timer timer= new Timer(10000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(GameFrame.this,"Game Over");
-                dispose();
-                new MainFrame().setVisible(true);
-            }
-        });
-        timer.setRepeats(false);
-        timer.start();
     }
     private void showGameOverPanel(){
         JPanel gameOverPanel = new JPanel();

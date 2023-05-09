@@ -1,19 +1,12 @@
 package com.zetcode;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import javax.swing.*;
+
 import com.zetcode.InGamePannel;
 import com.zetcode.GameFrame;
 
@@ -30,7 +23,7 @@ public class Board extends JPanel implements ActionListener {
 
     public static int DELAY = 100; ///게임 속도 (지렁이, 메테오 등)
 
-    public static int NUM= 10;  ///메테오, 장애물, 몬스터의 개수
+    public static int NUM = 10;  ///메테오, 장애물, 몬스터의 개수
 
     private SnakeEntity snake;
     private AppleEntity appleEntity;
@@ -62,7 +55,6 @@ public class Board extends JPanel implements ActionListener {
     private Image invincible_head;
 
     private Image shoot;
-
 
 
     private Timer timer;
@@ -104,8 +96,8 @@ public class Board extends JPanel implements ActionListener {
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
         loadImages();
         initGame();
-        timepannel=new InGamePannel();
-        timepannel.setBounds(0,0,150,30);
+        timepannel = new InGamePannel();
+        timepannel.setBounds(0, 0, 150, 30);
         add(timepannel);
     }
 
@@ -219,7 +211,7 @@ public class Board extends JPanel implements ActionListener {
         g.setColor(Color.white);
         g.setFont(small);
         g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
-        GameFrame gameFrame=new GameFrame();
+        GameFrame gameFrame = new GameFrame();
         gameFrame.setVisible(true);
     }
 
@@ -240,7 +232,6 @@ public class Board extends JPanel implements ActionListener {
             }
         }
     }
-
 
 
     private void locateApples() {
@@ -350,10 +341,5 @@ public class Board extends JPanel implements ActionListener {
                 invincible_start_time = System.currentTimeMillis();
             }
         }
-    }
-    private void backMainFrame() {
-        MainFrame mainFrame = new MainFrame();
-        setVisible(false);
-        mainFrame.setVisible(true);
     }
 }
