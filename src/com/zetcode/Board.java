@@ -7,8 +7,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
 
-import com.zetcode.InGamePannel;
-import com.zetcode.GameFrame;
+import com.zetcode.Entity.*;
+import com.zetcode.Frame.GameFrame;
+import com.zetcode.Frame.InGamePannel;
 
 public class Board extends JPanel implements ActionListener {
 
