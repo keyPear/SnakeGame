@@ -9,7 +9,7 @@ public class Snake extends JFrame {
         initUI();
         new Sound("sound/bgm.wav");
     }
-    
+
     private void initUI() {
         
         add(new Board());
