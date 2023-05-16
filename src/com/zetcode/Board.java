@@ -1,19 +1,12 @@
 package com.zetcode;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import javax.swing.*;
+
 import com.zetcode.InGamePannel;
 
 public class Board extends JPanel implements ActionListener {
@@ -263,7 +256,12 @@ public class Board extends JPanel implements ActionListener {
 
             //장애물과 충돌 확인
             for (int i = 0; i < obstacleEntity.getObstacleX().size(); i++) {
-                if (snake.getX()[0] == obstacleEntity.getObstacleX().get(i) && snake.getY()[0] == obstacleEntity.getObstacleY().get(i)) {
+//                if (snake.getX()[0] == obstacleEntity.getObstacleX().get(i) && snake.getY()[0] == obstacleEntity.getObstacleY().get(i)) {
+//                    inGame = false;
+//                }
+
+                if ((snake.getX()[0] >= obstacleEntity.getObstacleX().get(i)&&snake.getX()[0] <= obstacleEntity.getObstacleX().get(i)+32)
+                        && (snake.getY()[0] >= obstacleEntity.getObstacleY().get(i) && snake.getY()[0] <= obstacleEntity.getObstacleY().get(i)+22)) {
                     inGame = false;
                 }
             }
@@ -350,8 +348,10 @@ public class Board extends JPanel implements ActionListener {
         }
     }
     private void backMainFrame() {
+//        setVisible(false);
+        Window window = SwingUtilities.getWindowAncestor(this);
+        window.dispose();
         MainFrame mainFrame = new MainFrame();
-        setVisible(false);
         mainFrame.setVisible(true);
     }
 }

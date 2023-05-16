@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b2e94163-a51a-4f2b-85d8-9d99c11e9fe6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/SnakeGame优化版.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/AppleEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/AppleEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/Board$TAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/Board$TAdapter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/Board.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/LevelSelect$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/LevelSelect$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/LevelSelect$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/LevelSelect$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/LevelSelect$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/LevelSelect$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/LevelSelect$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/LevelSelect$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/LevelSelect$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/LevelSelect$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/LevelSelect$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/LevelSelect$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/LevelSelect$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/LevelSelect$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/LevelSelect.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/LevelSelect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/MainFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/MainFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/MainFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/MainFrame$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/MainFrame$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/MainFrame$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/MainFrame$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/MainFrame$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/MainFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/MeteorEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/MeteorEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/MonsterEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/MonsterEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/MypageFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/MypageFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/MypageFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/MypageFrame$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/MypageFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/MypageFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/ObstacleEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/ObstacleEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/ShootEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/ShootEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/Snake.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/Snake.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/SnakeEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/SnakeEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/Sound.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SnakeGame/com/zetcode/Sound.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/zetcode/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/zetcode/Board.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2PohCHj5Vv6OSLiG2lWH90pSlLj" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/liziang/Downloads/贪吃蛇 2/SnakeGame优化版&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b2e94163-a51a-4f2b-85d8-9d99c11e9fe6" name="Changes" comment="" />
+      <created>1684129212426</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1684129212426</updated>
+      <workItem from="1684129213579" duration="911000" />
+      <workItem from="1684214707407" duration="35000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
