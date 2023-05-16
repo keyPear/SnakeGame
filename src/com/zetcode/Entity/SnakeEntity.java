@@ -1,5 +1,6 @@
 package com.zetcode.Entity;
 
+
 public class SnakeEntity {
 
     private final int[] x;
@@ -82,4 +83,5 @@ public class SnakeEntity {
     public int getDots() {
         return dots;
     }
+
 }

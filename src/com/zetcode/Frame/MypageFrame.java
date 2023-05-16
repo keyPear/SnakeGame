@@ -22,7 +22,7 @@ public class MypageFrame extends JFrame {
         setLocationRelativeTo(null);
         setTitle("Mypage");
 
-        JButton backMainButton = new JButton("Back to Main");
+        JButton backMainButton = new JButton("Go To Main");
         backMainButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

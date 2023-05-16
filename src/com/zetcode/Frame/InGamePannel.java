@@ -18,6 +18,7 @@ public class InGamePannel extends JPanel implements ActionListener {
     private Timer timer;
     private Font font;
     private Color fontColor;
+    private int score=0;
 
     public InGamePannel() {
         startTime = System.currentTimeMillis();
@@ -44,10 +45,21 @@ public class InGamePannel extends JPanel implements ActionListener {
         g.setFont(font);
         g.drawString(String.format("Time: %02d:%02d:%02d", elapsedTime / 3600000,
                 (elapsedTime / 60000) % 60, (elapsedTime / 1000) % 60), 10, 30);
+        g.drawString("Score: "+score,10,50);
     }
 
     public void actionPerformed(ActionEvent e) {
         repaint();
     }
+
+    public void setScore(int score) {
+        this.score=score;
+        repaint();
+    }
+    public void incrementScore() {
+        score++;
+        repaint();
+    }
 }
+
 

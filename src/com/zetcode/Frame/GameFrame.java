@@ -9,10 +9,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import com.zetcode.Board;
 
 public class GameFrame extends JFrame {
 
     private static final long serialVersionUID = 1L;
+    private JPanel gamePanel;
 
 
     public GameFrame() {
@@ -56,6 +58,14 @@ public class GameFrame extends JFrame {
         gameOverPanel.add(gameOverLabel);
         add(gameOverPanel, BorderLayout.CENTER);
         validate();
+    }
+    private void stopGame(){
+        ((Board) gamePanel).stopTimer();
+        showGameOverPanel();
+    }
+    private void continueGame(){
+        ((Board) gamePanel).continueTimer();
+        showGameOverPanel();
     }
 
     public static void main(String[] args) {

@@ -57,6 +57,8 @@ public class Board extends JPanel implements ActionListener {
 
     private Image shoot;
 
+    private int score=0;
+
 
     private Timer timer;
     private Image ball;
@@ -130,8 +132,8 @@ public class Board extends JPanel implements ActionListener {
 
     private void initGame() {
         snake = new SnakeEntity(ALL_DOTS);
-        appleEntity = new AppleEntity(RAND_POS, DOT_SIZE);
 
+        appleEntity = new AppleEntity(RAND_POS, DOT_SIZE);
         appleEntity.locateApple(); // Pass RAND_POS to locateApple method
 
 
@@ -231,6 +233,7 @@ public class Board extends JPanel implements ActionListener {
                 meteorEntity = new MeteorEntity(10);
                 lastMeteorTime = System.currentTimeMillis();
             }
+            timepannel.incrementScore();
         }
     }
 
@@ -341,6 +344,26 @@ public class Board extends JPanel implements ActionListener {
                 invincible = true;
                 invincible_start_time = System.currentTimeMillis();
             }
+            if(key==KeyEvent.VK_Q){
+                stopTimer();
+            }
+            if(key==KeyEvent.VK_W){
+                continueTimer();
+            }
         }
+    }
+    public void stopTimer(){
+        if(timer!=null){
+            timer.stop();
+        }
+    }
+    public void continueTimer(){
+        if(timer!=null){
+            timer.start();
+        }
+    }
+    private void incrementScore() {
+        score++;
+        repaint();
     }
 }
