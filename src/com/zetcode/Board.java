@@ -345,6 +345,9 @@ public class Board extends JPanel implements ActionListener {
                 invincible_start_time = System.currentTimeMillis();
             }
             if(key==KeyEvent.VK_Q){//게임타이머 정지~
+                stopTimer();
+            }
+            if(key==KeyEvent.VK_W){
                 continueTimer();
             }
         }
