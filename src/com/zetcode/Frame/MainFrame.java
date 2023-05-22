@@ -1,6 +1,7 @@
 package com.zetcode.Frame;
 
 import com.zetcode.Snake;
+import com.zetcode.SnakeMap2;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -23,6 +24,7 @@ public class MainFrame extends JFrame implements KeyListener{
     public MainFrame() {
         JButton openMarketButton = new JButton(img3);//
         openMarketButton.setRolloverIcon(img4);
+        openMarketButton.setBorderPainted(false);
         openMarketButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -39,6 +41,20 @@ public class MainFrame extends JFrame implements KeyListener{
                 openMypageFrame();
             }
         });
+
+        // 在画板添加地图2的按钮
+        JButton openMap2Button = new JButton("Map 2");
+        openMap2Button.setToolTipText("second Map");
+//      openMap2Button.setRolloverIcon(img2);
+        openMap2Button.setBorderPainted(false);
+        openMap2Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 按钮点击事件触发画板生成
+                openMap2Frame();
+            }
+        });
+
         JButton closeMainButton = new JButton(img7);
         closeMainButton.setRolloverIcon(img8);
         closeMainButton.setBorderPainted(false);
@@ -64,11 +80,13 @@ public class MainFrame extends JFrame implements KeyListener{
         setLayout(null);
         gotoBoardButton.setBounds(100,100,200,100);
         openMarketButton.setBounds(100, 200, 200, 100);
-        openMypageButton.setBounds(100, 300, 200, 100);
-        closeMainButton.setBounds(100, 400, 200, 100);
+        openMap2Button.setBounds(100, 300, 200, 100);
+        openMypageButton.setBounds(100, 400, 200, 100);
+        closeMainButton.setBounds(100, 500, 200, 100);
 
         add(openMarketButton);
         add(openMypageButton);
+        add(openMap2Button);
         add(closeMainButton);
         add(gotoBoardButton);
         setTitle("Main");
@@ -80,10 +98,12 @@ public class MainFrame extends JFrame implements KeyListener{
 
         openMarketButton.addKeyListener(this);
         openMypageButton.addKeyListener(this);
+        openMap2Button.addKeyListener(this);
         closeMainButton.addKeyListener(this);
         gotoBoardButton.addKeyListener(this);
         openMarketButton.setFocusable(true);
         openMypageButton.setFocusable(true);
+        openMap2Button.setFocusable(true);
         closeMainButton.setFocusable(true);
         gotoBoardButton.setFocusable(true);
     }
@@ -118,6 +138,14 @@ public class MainFrame extends JFrame implements KeyListener{
         MypageFrame mypageFrame = new MypageFrame(this);
         setVisible(false);
         mypageFrame.setVisible(true);
+    }
+
+    private void openMap2Frame() {
+        SnakeMap2 snakeMap2 = new SnakeMap2();
+
+        setVisible(false);
+
+        snakeMap2.setVisible(true);
     }
 
     private void closeMainFrame() {

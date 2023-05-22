@@ -260,7 +260,12 @@ public class Board extends JPanel implements ActionListener {
 
             //장애물과 충돌 확인
             for (int i = 0; i < obstacleEntity.getObstacleX().size(); i++) {
-                if (snake.getX()[0] == obstacleEntity.getObstacleX().get(i) && snake.getY()[0] == obstacleEntity.getObstacleY().get(i)) {
+//                if (snake.getX()[0] == obstacleEntity.getObstacleX().get(i) && snake.getY()[0] == obstacleEntity.getObstacleY().get(i)) {
+//                    inGame = false;
+//                }
+                // 判断蛇是否和墙体点位重合，是就设置游戏结束状态
+                if ((snake.getX()[0] >= obstacleEntity.getObstacleX().get(i)&&snake.getX()[0] <= obstacleEntity.getObstacleX().get(i)+32)
+                        && (snake.getY()[0] >= obstacleEntity.getObstacleY().get(i) && snake.getY()[0] <= obstacleEntity.getObstacleY().get(i)+22)) {
                     inGame = false;
                 }
             }

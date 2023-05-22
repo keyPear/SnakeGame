@@ -3,11 +3,7 @@ package com.zetcode.Frame;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
+import javax.swing.*;
 import java.awt.Font;
 import com.zetcode.Board;
 
@@ -36,7 +32,11 @@ public class GameFrame extends JFrame {
                         "Are you sure you want to end the game?", "End Game",
                         JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
-                    dispose();
+                    // 关闭所有窗口
+                    Window[] windows = Window.getWindows();
+                    for (Window window : windows) {
+                        window.dispose();
+                    }
                     new MainFrame().setVisible(true);
                 }
             }
