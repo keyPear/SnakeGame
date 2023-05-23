@@ -54,6 +54,7 @@ public class Board extends JPanel implements ActionListener {
     private long invincible_start_time;
 
     private Image invincible_head;
+    private Image invincible_dot;
 
     private Image shoot;
 
@@ -125,8 +126,12 @@ public class Board extends JPanel implements ActionListener {
         ImageIcon iis = new ImageIcon("src/resources/shoot.png");
         shoot = iis.getImage();
 
-        ImageIcon ii_invincible_head = new ImageIcon("src/resources/dot.png");
+        ImageIcon ii_invincible_head = new ImageIcon("src/resources/headshield.png");
+        ImageIcon ii_invincible_dot = new ImageIcon("src/resources/dotshield.png");
+
+
         invincible_head = ii_invincible_head.getImage();
+        invincible_dot = ii_invincible_dot.getImage();
 
     }
 
@@ -171,9 +176,14 @@ public class Board extends JPanel implements ActionListener {
                         g.drawImage(head, snake.getX()[z], snake.getY()[z], this);
                     }
                 } else {
-                    g.drawImage(ball, snake.getX()[z], snake.getY()[z], this);
+                    if (invincible) {
+                        g.drawImage(invincible_dot, snake.getX()[z], snake.getY()[z], this);
+                    } else {
+                        g.drawImage(ball, snake.getX()[z], snake.getY()[z], this);
+                    }
                 }
             }
+
 
             for (int i = 0; i < obstacleEntity.getObstacleX().size(); i++) {
                 g.drawImage(obstacle, obstacleEntity.getObstacleX().get(i), obstacleEntity.getObstacleY().get(i), this);
