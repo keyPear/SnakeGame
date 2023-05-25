@@ -75,12 +75,10 @@ public class LoginFrame extends JFrame {
         registerFrame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        FirebaseUtil.initialize(); //db 시자크
-
-        LoginFrame loginFrame = new LoginFrame();
-        loginFrame.setVisible(true);
-    }
-
-
+//    public static void main(String[] args) {
+//        FirebaseUtil.initialize(); //db 시자크
+//
+//        LoginFrame loginFrame = new LoginFrame();
+//        loginFrame.setVisible(true);
+//    }
 }

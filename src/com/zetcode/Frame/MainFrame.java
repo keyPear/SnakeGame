@@ -129,9 +129,9 @@ public class MainFrame extends JFrame implements KeyListener{
         setVisible(false);
         board.setVisible(true);
     }
-
-    public static void main(String[] args) {
-        MainFrame mainFrame = new MainFrame();
-        mainFrame.setVisible(true);
-    }
+//
+//    public static void main(String[] args) {
+//        MainFrame mainFrame = new MainFrame();
+//        mainFrame.setVisible(true);
+//    }
 }

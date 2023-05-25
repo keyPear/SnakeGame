@@ -67,7 +67,4 @@ public class GameFrame extends JFrame {
         ((Board) gamePanel).continueTimer();
         showGameOverPanel();
     }
-
-    public static void main(String[] args) {
-    }
 }
