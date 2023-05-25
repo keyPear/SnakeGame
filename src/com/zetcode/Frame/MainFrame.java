@@ -19,6 +19,7 @@ public class MainFrame extends JFrame implements KeyListener{
     ImageIcon img6=new ImageIcon("src/resources/btn_OpenMypage2.jpg");
     ImageIcon img7=new ImageIcon("src/resources/btn_CloseMain.jpg");
     ImageIcon img8=new ImageIcon("src/resources/btn_CloseMain2.jpg");
+    ImageIcon img9=new ImageIcon("src/resources/btn_GoToMap2.jpg");
     public static final String ID="admin";
 
     public MainFrame() {
@@ -43,9 +44,8 @@ public class MainFrame extends JFrame implements KeyListener{
         });
 
         // 在画板添加地图2的按钮
-        JButton openMap2Button = new JButton("Map 2");
-        openMap2Button.setToolTipText("second Map");
-//      openMap2Button.setRolloverIcon(img2);
+        JButton openMap2Button = new JButton(img9);
+        openMap2Button.setRolloverIcon(img9);
         openMap2Button.setBorderPainted(false);
         openMap2Button.addActionListener(new ActionListener() {
             @Override
@@ -142,9 +142,7 @@ public class MainFrame extends JFrame implements KeyListener{
 
     private void openMap2Frame() {
         SnakeMap2 snakeMap2 = new SnakeMap2();
-
         setVisible(false);
-
         snakeMap2.setVisible(true);
     }
 
