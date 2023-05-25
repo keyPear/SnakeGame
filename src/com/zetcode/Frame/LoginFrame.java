@@ -1,11 +1,14 @@
 package com.zetcode.Frame;
 
 import com.zetcode.FirebaseUtil;
+import com.zetcode.User;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.ExecutionException;
+
 
 public class LoginFrame extends JFrame {
 
@@ -43,10 +46,15 @@ public class LoginFrame extends JFrame {
                 String id = idField.getText();
                 String pw = String.valueOf(pwField.getPassword());
 
-                if (id.equals(MainFrame.ID) && pw.equals(MainFrame.ID)) {
-                    openMypageFrame();
-                } else {
-                    JOptionPane.showMessageDialog(null, "로그인 실패");
+                try {
+                    String validPassword = FirebaseUtil.validateUser(id);
+                    if (pw.equals(validPassword)) {
+                        openMypageFrame();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "로그인 실패");
+                    }
+                } catch (ExecutionException | InterruptedException ex) {
+                    ex.printStackTrace();
                 }
             }
         });
@@ -74,6 +82,8 @@ public class LoginFrame extends JFrame {
         setVisible(false);
         registerFrame.setVisible(true);
     }
+
+
 
 //    public static void main(String[] args) {
 //        FirebaseUtil.initialize(); //db 시자크
