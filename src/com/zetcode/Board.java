@@ -34,8 +34,7 @@ public class Board extends JPanel implements ActionListener {
     private boolean upDirection = false;
     private boolean downDirection = false;
     private boolean inGame = true;
-
-
+    private boolean gamePaused = false;
     private final int max_apple = 5; // 최대 생성 가능한 사과 개수
     private int current_apple = 0; // 현재 생성된 사과 개수
 
@@ -354,11 +353,13 @@ public class Board extends JPanel implements ActionListener {
                 invincible = true;
                 invincible_start_time = System.currentTimeMillis();
             }
-            if(key==KeyEvent.VK_Q){//게임타이머 정지~
-                stopTimer();
-            }
-            if(key==KeyEvent.VK_W){
-                continueTimer();
+            if(key==KeyEvent.VK_ESCAPE){//게임타이머 정지~
+                gamePaused = !gamePaused;
+                if (gamePaused) {
+                    stopTimer();
+                } else {
+                    continueTimer();
+                }
             }
         }
     }
