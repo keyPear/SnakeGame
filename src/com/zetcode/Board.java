@@ -34,8 +34,7 @@ public class Board extends JPanel implements ActionListener {
     private boolean upDirection = false;
     private boolean downDirection = false;
     private boolean inGame = true;
-
-
+    private boolean gamePaused = false;
     private final int max_apple = 5; // 최대 생성 가능한 사과 개수
     private int current_apple = 0; // 현재 생성된 사과 개수
 
@@ -54,6 +53,7 @@ public class Board extends JPanel implements ActionListener {
     private long invincible_start_time;
 
     private Image invincible_head;
+    private Image invincible_dot;
 
     private Image shoot;
 
@@ -125,8 +125,12 @@ public class Board extends JPanel implements ActionListener {
         ImageIcon iis = new ImageIcon("src/resources/shoot.png");
         shoot = iis.getImage();
 
-        ImageIcon ii_invincible_head = new ImageIcon("src/resources/dot.png");
+        ImageIcon ii_invincible_head = new ImageIcon("src/resources/headshield.png");
+        ImageIcon ii_invincible_dot = new ImageIcon("src/resources/dotshield.png");
+
+
         invincible_head = ii_invincible_head.getImage();
+        invincible_dot = ii_invincible_dot.getImage();
 
     }
 
@@ -171,9 +175,14 @@ public class Board extends JPanel implements ActionListener {
                         g.drawImage(head, snake.getX()[z], snake.getY()[z], this);
                     }
                 } else {
-                    g.drawImage(ball, snake.getX()[z], snake.getY()[z], this);
+                    if (invincible) {
+                        g.drawImage(invincible_dot, snake.getX()[z], snake.getY()[z], this);
+                    } else {
+                        g.drawImage(ball, snake.getX()[z], snake.getY()[z], this);
+                    }
                 }
             }
+
 
             for (int i = 0; i < obstacleEntity.getObstacleX().size(); i++) {
                 g.drawImage(obstacle, obstacleEntity.getObstacleX().get(i), obstacleEntity.getObstacleY().get(i), this);
@@ -344,11 +353,13 @@ public class Board extends JPanel implements ActionListener {
                 invincible = true;
                 invincible_start_time = System.currentTimeMillis();
             }
-            if(key==KeyEvent.VK_Q){//게임타이머 정지~
-                stopTimer();
-            }
-            if(key==KeyEvent.VK_W){
-                continueTimer();
+            if(key==KeyEvent.VK_ESCAPE){//게임타이머 정지~
+                gamePaused = !gamePaused;
+                if (gamePaused) {
+                    stopTimer();
+                } else {
+                    continueTimer();
+                }
             }
         }
     }
