@@ -4,6 +4,7 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.WriteResult;
 import com.zetcode.FirebaseUtil;
 import com.zetcode.Frame.LoginFrame;
+import com.zetcode.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -52,22 +53,14 @@ public class RegisterFrame extends JFrame {
                 String id = idField.getText();
                 String pw = String.valueOf(pwField.getPassword());
 
-                // Save user to Firestore
-                Map<String, Object> user = new HashMap<>();
-                user.put("id", id);
-                user.put("password", pw);
-
-                ApiFuture<WriteResult> future = FirebaseUtil.getDb().collection("users").document(id).set(user);
-
                 try {
-                    System.out.println("User saved: " + future.get().getUpdateTime());
-                } catch (InterruptedException | ExecutionException ex) {
+                    FirebaseUtil.addUser(new User(id, pw));
+                    JOptionPane.showMessageDialog(null, "회원 가입이 완료되었습니다.");
+                    loginFrame.setVisible(true);
+                    dispose();
+                } catch (ExecutionException | InterruptedException ex) {
                     ex.printStackTrace();
                 }
-
-                JOptionPane.showMessageDialog(null, "회원 가입이 완료되었습니다.");
-                loginFrame.setVisible(true);
-                dispose();
             }
         });
 
